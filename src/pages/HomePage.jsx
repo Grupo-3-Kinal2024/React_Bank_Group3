@@ -1,8 +1,7 @@
-import Navbar from '../../components/navbar/Navbar';
-import '../style.css';
-import heroImage from '../../assets/img/banco.jpg';
+import Navbar from "../components/navbar/Navbar";
+import heroImage from '../assets/img/banco.jpg'
 
-export const HomePage = () => {
+const HomePage = () => {
     return (
         <>
             <Navbar />
@@ -24,3 +23,5 @@ export const HomePage = () => {
         </>
     );
 };
+
+export default HomePage;

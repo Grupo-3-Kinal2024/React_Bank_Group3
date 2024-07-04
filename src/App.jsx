@@ -1,15 +1,19 @@
-import { useRoutes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import routes from "./routes.jsx";
+import React, { Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import routes from './routes';
+
+const Routes = () => {
+    const routing = useRoutes(routes);
+    return routing;
+};
 
 const App = () => {
-    let element = useRoutes(routes);
-
     return (
-        <>
-            {element}
-            <Toaster position="bottom-right" reverseOrder={false} />
-        </>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes />
+            <Toaster position="bottom-center" reverseOrder={false} />
+        </Suspense>
     );
 };
 
