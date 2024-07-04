@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import useAuth from '../../hook/useAuth';
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { isAuthenticated, user , logout } = useAuth();
 
     return (
         <div className="bg-white shadow-lg">
             <div className="container mx-auto px-6 py-3 flex items-center justify-between">
                 <div className="flex items-center">
                     <div className="mr-6">
-                        <img className="h-10" src="path/to/logo.png" alt="Logo" />
+                        <img className="h-10" src="https://static.vecteezy.com/system/resources/previews/020/194/761/non_2x/bank-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Logo" />
                     </div>
                     <div className="text-xl font-semibold">E-bank</div>
                 </div>
@@ -46,8 +48,17 @@ const Navbar = () => {
                     <div className="hidden lg:flex lg:items-center space-x-4">
                         <a href="#" className="text-black text-lg hover:underline">About us</a>
                         <a href="#" className="text-black text-lg hover:underline">Features</a>
-                        <button><Link to={`/Login/`} className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Log In</Link></button>
-                        <button><Link to={`/Register/`} className="bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-300">Sign Up</Link></button>
+                        {isAuthenticated ? (
+                            <>
+                            <button onClick={logout}>logouts</button>
+                            </>
+                        ) : (
+                            <>
+
+                                <button><Link to={`/Login/`} className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Log In</Link></button>
+                                <button><Link to={`/Register/`} className="bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-300">Sign Up</Link></button>
+                            </>)
+                        }
                     </div>
                 )}
             </div>
