@@ -1,7 +1,16 @@
-export default function App() {
+import { useRoutes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import routes from "./routes.jsx";
+
+const App = () => {
+    let element = useRoutes(routes);
+
     return (
-        <h1 className="text-3xl font-bold underline">
-            Hello world!
-        </h1>
-    )
-}
+        <>
+            {element}
+            <Toaster position="bottom-right" reverseOrder={false} />
+        </>
+    );
+};
+
+export default App;
