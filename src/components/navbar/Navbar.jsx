@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,8 +46,8 @@ const Navbar = () => {
                     <div className="hidden lg:flex lg:items-center space-x-4">
                         <a href="#" className="text-black text-lg hover:underline">About us</a>
                         <a href="#" className="text-black text-lg hover:underline">Features</a>
-                        <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Log In</button>
-                        <button className="bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-300">Sign Up</button>
+                        <button><Link to={`/Login/`} className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Log In</Link></button>
+                        <button><Link to={`/Register/`} className="bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-300">Sign Up</Link></button>
                     </div>
                 )}
             </div>
