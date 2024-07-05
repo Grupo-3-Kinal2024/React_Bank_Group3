@@ -12,6 +12,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { accountApi } from './services/accountApi';
 
 
 const persistConfig = {
@@ -24,8 +25,8 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 export const store = configureStore({
     reducer: {
         [userApi.reducerPath]: userApi.reducer,
-
-        user: persistedReducer,
+        [accountApi.reducerPath]: accountApi.reducer,
+        user: persistedReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -39,7 +40,8 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware),
+        }).concat(userApi.middleware, accountApi.middleware),
+        
 });
 
 export const persistor = persistStore(store);
