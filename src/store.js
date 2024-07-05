@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './services/userApi';
+import { accountApi } from './services/accountApi';
 import userReducer from './feature/userSlice';
 import {
     persistStore,
@@ -12,7 +13,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { accountApi } from './services/accountApi';
+
 
 
 const persistConfig = {

@@ -1,17 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { useCreateAccountMutation } from '../services/accountApi';
+import { useCreateMutation } from '../services/accountApi';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    const [createAccount, { isLoading: isLoadingCreateAccount }] = useCreateAccountMutation();
+    const [createAccount] = useCreateMutation();
 
     const handlerCreateAccount = async (data) => {
         try {
-            console.log("Info que llega: " + data);   //DEBUG
-            await createAccount(data).unwrap();
-            navigate('/'); //Aquí va el Dashboard de la cuenta bancaria
+            console.dir(data);   //DEBUG
+            await createAccount(data)
+            //navigate('/'); //Aquí va el Dashboard de la cuenta bancaria
             toast.success('Account Created Successfully');
         } catch (err) {
             console.log(err);
@@ -25,7 +24,6 @@ const useAccount = () => {
 
     return {
         createAccount: handlerCreateAccount,
-        loading: isLoadingCreateAccount
     }
 
 }

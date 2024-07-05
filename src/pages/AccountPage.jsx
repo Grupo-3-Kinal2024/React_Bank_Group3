@@ -10,7 +10,6 @@ export const AccountPage = () => {
 
     const onSubmit = (data) => {
         console.log("Info tomada directamente: ",data);
-        
         createAccount(data)
     };
 
@@ -37,10 +36,10 @@ export const AccountPage = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="credit">Open your Account whit...</label>
                                 <select id="credit" {...register("credit", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
                                     <option selected disabled>Selecciona en GTQ</option>
-                                    <option>Q250.00</option>
-                                    <option>Q200.00</option>
-                                    <option>Q100.00</option>
-                                </select>
+                                    <option value={250}>Q250.00</option>
+                                    <option value={200}>Q200.00</option>
+                                    <option value={100}>Q100.00</option>
+                                </select >
                                 {errors.credit && <span className="text-red-500">This field is required</span>}
                             </div>
 
