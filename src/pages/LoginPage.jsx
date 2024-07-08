@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
 import useAuth from '../hook/useAuth';
+import Input from '../components/common/Input';
 
 const LoginPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -21,15 +22,30 @@ const LoginPage = () => {
                     <p className="text-center text-gray-600 mb-6">Join the community today!</p>
                     <form onSubmit={handleSubmit(onSubmit)} noValidate>
                         <div className="mb-4">
-                            <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
-                            <input type="email" id="email" {...register("email", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.email && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="email"
+                                label="Email"
+                                name="email"
+                                color="text-gray-700"
+                                placeholder="Enter your email"
+                                register={register}
+                                rules={{ required: 'Email is required' }}
+                                error={errors.email}
+                            />
                         </div>
-                        <div className="mb-6">
-                            <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
-                            <input type="password" id="password" {...register("pass", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.pass && <span className="text-red-500">This field is required</span>}
+                        <div className="mb-4">
+                            <Input
+                                type="password"
+                                label="Password"
+                                name="pass"
+                                color="text-gray-700"
+                                placeholder="Enter your password"
+                                register={register}
+                                rules={{ required: 'Password is required' }}
+                                error={errors.pass}
+                            />
                         </div>
+
                         <button type="submit" className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none">
                             {loading ? "Loading.." : "Sign in"}
                         </button>
