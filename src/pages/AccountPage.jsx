@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
 import accountImg from '../assets/img/account.jpg'
 import useAccount from '../hook/useAccount';
+import useAuth from '../hook/useAuth';
 
 export const AccountPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {createAccount, loading} = useAccount();
+    const { createAccount, loading } = useAccount();
+    const { user } = useAuth();
 
     const onSubmit = (data) => {
-        console.log("Info tomada directamente: ",data);
+        console.log("Info tomada directamente: ", data);
+        data.idUser = user.id;
+        console.log("Info con id: ", data);
         createAccount(data)
     };
 
