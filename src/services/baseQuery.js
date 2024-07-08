@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
 
         if (token) {
             console.log('Token:', token); // Debugging token
-            headers.set('Authorization', `${token}`);
+            headers.set('token', `${token}`);
         } else {
             console.warn('No token found in state');
         }
