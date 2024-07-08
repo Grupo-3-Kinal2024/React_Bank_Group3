@@ -1,12 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
+import Input from '../components/common/Input';
+import useAuth from '../hook/useAuth';
 
 const RegisterPage = () => {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register: formRegister, handleSubmit, formState: { errors }, watch, reset } = useForm();
+    const { register } = useAuth();
 
     const onSubmit = (data) => {
-
+        register(data, reset)
         console.log(data);
     };
 
@@ -19,53 +22,126 @@ const RegisterPage = () => {
                     <p className="text-center text-gray-600 mb-6">Join the community today!</p>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
-                            <label className="block text-gray-700 mb-2" htmlFor="dpi">DPI</label>
-                            <input type="text" id="dpi" {...register("dpi", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.dpi && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="number"
+                                label="DPI"
+                                name="DPI"
+                                color="text-gray-700"
+                                placeholder="Enter your DPI"
+                                register={formRegister}
+                                rules={{
+                                    required: 'DPI is required',
+                                    minLength: {
+                                        value: 13,
+                                        message: 'DPI must be exactly 13 characters'
+                                    },
+                                    maxLength: {
+                                        value: 13,
+                                        message: 'DPI must be exactly 13 characters'
+                                    }
+                                }}
+                                error={errors.DPI}
+                            />
                         </div>
                         <div className="mb-4 flex space-x-4">
                             <div className="w-1/2">
-                                <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
-                                <input type="text" id="name" {...register("name", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.name && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="text"
+                                    label="Name"
+                                    name="name"
+                                    color="text-gray-700"
+                                    placeholder="Enter your name"
+                                    register={formRegister}
+                                    rules={{ required: 'Name is required' }}
+                                    error={errors.name}
+                                />
                             </div>
                             <div className="w-1/2">
-                                <label className="block text-gray-700 mb-2" htmlFor="lastName">Last Name</label>
-                                <input type="text" id="lastName" {...register("lastName", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.lastName && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="text"
+                                    label="Last Name"
+                                    name="lastName"
+                                    color="text-gray-700"
+                                    placeholder="Enter your last name"
+                                    register={formRegister}
+                                    rules={{ required: 'Last Name is required' }}
+                                    error={errors.lastName}
+                                />
                             </div>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 mb-2" htmlFor="userName">Username</label>
-                            <input type="text" id="userName" {...register("userName", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.userName && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="text"
+                                label="Username"
+                                name="userName"
+                                color="text-gray-700"
+                                placeholder="Enter your username"
+                                register={formRegister}
+                                rules={{ required: 'Username is required' }}
+                                error={errors.userName}
+                            />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
-                            <input type="email" id="email" {...register("email", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.email && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="email"
+                                label="Email"
+                                name="email"
+                                color="text-gray-700"
+                                placeholder="Enter your email"
+                                register={formRegister}
+                                rules={{ required: 'Email is required' }}
+                                error={errors.email}
+                            />
                         </div>
                         <div className="mb-4 flex space-x-4">
                             <div className="w-1/2">
-                                <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
-                                <input type="password" id="password" {...register("password", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.password && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="password"
+                                    label="Password"
+                                    name="pass"
+                                    color="text-gray-700"
+                                    placeholder="Enter your password"
+                                    register={formRegister}
+                                    rules={{ required: 'Password is required' }}
+                                    error={errors.pass}
+                                />
                             </div>
                             <div className="w-1/2">
-                                <label className="block text-gray-700 mb-2" htmlFor="phone">Phone</label>
-                                <input type="text" id="phone" {...register("phone", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.phone && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="text"
+                                    label="Phone"
+                                    name="phone"
+                                    color="text-gray-700"
+                                    placeholder="Enter your phone number"
+                                    register={formRegister}
+                                    rules={{ required: 'Phone is required' }}
+                                    error={errors.phone}
+                                />
                             </div>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 mb-2" htmlFor="address">Address</label>
-                            <input type="text" id="address" {...register("address", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.address && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="text"
+                                label="Address"
+                                name="address"
+                                color="text-gray-700"
+                                placeholder="Enter your address"
+                                register={formRegister}
+                                rules={{ required: 'Address is required' }}
+                                error={errors.address}
+                            />
                         </div>
                         <div className="mb-6">
-                            <label className="block text-gray-700 mb-2" htmlFor="jobName">Job Name</label>
-                            <input type="text" id="jobName" {...register("jobName", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            {errors.jobName && <span className="text-red-500">This field is required</span>}
+                            <Input
+                                type="text"
+                                label="Job Name"
+                                name="jobName"
+                                color="text-gray-700"
+                                placeholder="Enter your job name"
+                                register={formRegister}
+                                rules={{ required: 'Job Name is required' }}
+                                error={errors.jobName}
+                            />
                         </div>
                         <button type="submit" className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none">Sign up</button>
                     </form>

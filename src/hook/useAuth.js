@@ -12,6 +12,15 @@ const useAuth = () => {
     const [register, { isLoading: isLoadingRegister }] = useRegisterMutation();
     const { isAuthenticated, user } = useSelector((state) => state.user);
 
+    const handleError = (err) => {
+        console.log(err);
+        const errorMessage = err?.data?.errors?.[0]?.msg
+            || err?.data
+            || err?.data?.error
+            || 'An error occurred, please try again';
+        toast.error(errorMessage);
+    };
+
     const handlerLogin = async (data) => {
         try {
             const loginRequest = await login(data).unwrap();
@@ -20,22 +29,19 @@ const useAuth = () => {
             navigate('/');
             toast.success('Successfully logged in');
         } catch (err) {
-            console.log(err)
-            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
-            toast.error(errorMessage);
+            handleError(err);
         }
     };
 
-    const handlerRegister = async (data) => {
+    const handlerRegister = async (data, reset) => {
         try {
-            const formData = prepareFormData(data);
-            await register(formData).unwrap();
+
+            await register(data).unwrap();
+            reset();
             navigate('/');
             toast.success('You have successfully registered');
         } catch (err) {
-            console.log(err)
-            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
-            toast.error(errorMessage);
+            handleError(err);
         }
     };
 
