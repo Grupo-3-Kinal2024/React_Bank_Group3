@@ -25,10 +25,8 @@ export const TransferAccountPage = () => {
 
     return (
         <>
-            <Navbar />
-
-            <div className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center bg-gray-100 py-12">
-                <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-4xl flex flex-col lg:flex-row">
+            <div className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center mb-6 py-12">
+                <div className=" p-10 w-full max-w-4xl flex flex-col lg:flex-row">
                     <div className="w-full p-2 flex items-center justify-center">
                         <img src={transferImg} alt="Illustration" className="w-full h-auto max-w-sm object-center object-cover" />
                     </div>

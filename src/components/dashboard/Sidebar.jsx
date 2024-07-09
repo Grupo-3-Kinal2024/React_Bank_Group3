@@ -15,7 +15,8 @@ export const Sidebar = ({ children }) => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu bg-base-300 text-base-content min-h-full w-80 p-4 ">
-                        <li><Link to='/dashboard/'>Cuentas</Link></li>
+                        <li><Link to='/dashboard/'>SA</Link></li>
+                        <li><Link to='/dashboard/transfer'>Transfer</Link></li>
                         <li><Link to='/dashboard/create-account'>Crear Cuenta</Link></li>
                     </ul>
                 </div>
