@@ -26,7 +26,7 @@ const useAuth = () => {
             const loginRequest = await login(data).unwrap();
             console.log(loginRequest)
             dispatch(setCredentials(loginRequest));
-            navigate('/');
+            navigate('/dashboard/create-account');
             toast.success('Successfully logged in');
         } catch (err) {
             handleError(err);

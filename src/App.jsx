@@ -10,7 +10,7 @@ const Routes = () => {
 
 const App = () => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={null}>
             <Routes />
             <Toaster position="bottom-center" reverseOrder={false} />
         </Suspense>

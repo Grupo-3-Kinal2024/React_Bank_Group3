@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import Navbar from '../components/navbar/Navbar';
 import accountImg from '../assets/img/account.jpg'
 import useAccount from '../hook/useAccount';
 import useAuth from '../hook/useAuth';
@@ -26,9 +25,8 @@ export const AccountPage = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="min-h-[calc(100vh-64px)] px-5 flex flex-col items-center justify-center bg-gray-100 py-12">
-                <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-4xl flex">
+            <div className=" flex flex-col items-center justify-center overflow-y-scroll min-h-[calc(100vh-64px)] antialiased">
+                <div className="w-full max-w-4xl flex">
                     <div className="hidden lg:block w-1/2 p-8">
                         <img src={accountImg} alt="Illustration" className="w-full h-auto" />
                     </div>
@@ -72,6 +70,7 @@ export const AccountPage = () => {
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </>
