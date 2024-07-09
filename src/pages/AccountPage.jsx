@@ -18,9 +18,7 @@ export const AccountPage = () => {
     ];
 
     const onSubmit = (data) => {
-        console.log("Info tomada directamente: ", data);
         data.idUser = user.id;
-        console.log("Info con id: ", data);
         createAccount(data)
     };
 

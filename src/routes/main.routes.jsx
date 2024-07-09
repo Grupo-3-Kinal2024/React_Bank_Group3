@@ -6,9 +6,9 @@ const Service = lazy(() => import('../pages/ServicePage.jsx'));
 
 const mainRoutes = [
     { path: '/', element: <Home /> },
-    { path: '/createAccount', element: <Account />},
-    { path: '/transferAccount', element: <TransferAccount />},
-    { path: '/service', element: <Service />}
+    { path: '/createAccount', element: <Account /> },
+    { path: '/transferAccount', element: <TransferAccount /> },
+    { path: '/service', element: <Service /> }
 ]
 
 export default mainRoutes;

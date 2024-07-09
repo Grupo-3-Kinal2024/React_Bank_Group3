@@ -1,18 +1,32 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import Input from '../components/common/Input';
 import Navbar from '../components/navbar/Navbar';
 import transferImg from '../assets/img/transfer.jpg';
+import { ComboBox } from '../components/common/ComboBox';
+import useTransaction from '../hook/useTransaction.js';
+import useAuth from '../hook/useAuth.js';
 
 export const TransferAccountPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { transfer } = useTransaction();
+    const { user } = useAuth();
 
     const onSubmit = (data) => {
-        console.log(data);
+        data.idUser = user.id;
+        console.log("Lo que se va: ", data);
+        transfer(data);
     };
-    
+
+    const accounts = user.accounts;
+    const options = accounts.map(account => {
+        return { value: account, label: `${account}` };
+    });
+
     return (
         <>
             <Navbar />
+
             <div className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center bg-gray-100 py-12">
                 <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-4xl flex flex-col lg:flex-row">
                     <div className="w-full p-2 flex items-center justify-center">
@@ -23,19 +37,54 @@ export const TransferAccountPage = () => {
                         <p className="text-center text-gray-600 mb-8">Fill in the details to transfer funds</p>
                         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                             <div className="mb-6">
-                                <label className="block text-gray-700 mb-2" htmlFor="destinationAccount">Destination Account</label>
-                                <input type="number" id="destinationAccount" {...register("destinationAccount", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
-                                {errors.destinationAccount && <span className="text-red-500">This field is required</span>}
+                                <ComboBox
+                                    label="My account"
+                                    name="sourceAccount"
+                                    placeholder="Select your account to transfer"
+                                    options={options}
+                                    register={register}
+                                    rules={{ required: 'This field is required' }}
+                                    error={errors.sourceAccount}
+                                    color="text-gray-700"
+                                />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-gray-700 mb-2" htmlFor="amount">Amount</label>
-                                <input type="number" id="amount" {...register("amount", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
-                                {errors.amount && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="number"
+                                    label="Destination Account"
+                                    name="destinationAccount"
+                                    color="text-gray-700"
+                                    placeholder="Numbers"
+                                    register={register}
+                                    rules={{ required: 'Enter the destination account' }}
+                                    error={errors.destinationAccount}
+                                />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-gray-700 mb-2" htmlFor="description">Description</label>
-                                <textarea id="description" {...register("description", { required: true })} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
-                                {errors.description && <span className="text-red-500">This field is required</span>}
+                                <Input
+                                    type="number"
+                                    label="Enter the amount to transfer"
+                                    name="amount"
+                                    color="text-gray-700"
+                                    placeholder="(GTQ)"
+                                    register={register}
+                                    rules={{ required: 'Enter the amount to transfer' }}
+                                    error={errors.amount}
+                                />
+                            </div>
+                            <div className="mb-6">
+
+                                <Input
+                                    type="text"
+                                    label="Enter the description of the transfer"
+                                    name="description"
+                                    color="text-gray-700"
+                                    placeholder="Description"
+                                    register={register}
+                                    rules={{ required: 'Enter the description' }}
+                                    error={errors.description}
+                                />
+
                             </div>
                             <button type="submit" className="w-full bg-gray-800 text-white py-3 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">Transfer</button>
                         </form>
