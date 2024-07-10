@@ -1,3 +1,4 @@
+
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 
@@ -7,7 +8,7 @@ export const favoriteApi = createApi({
     endpoints: (builder) => ({
         getAllFavorites: builder.query({
             query: () => ({
-                url: 'favorite',
+                url: 'favorite/',
                 method: 'GET',
             }),
         }),

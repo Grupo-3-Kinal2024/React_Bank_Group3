@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './services/userApi';
 import { accountApi } from './services/accountApi';
 import { serviceApi } from './services/serviceApi';
+import { favoriteApi } from './services/favoriteApi';
 import userReducer from './feature/userSlice';
 import {
     persistStore,
@@ -27,6 +28,7 @@ export const store = configureStore({
         [userApi.reducerPath]: userApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [serviceApi.reducerPath]: serviceApi.reducer,
+        [favoriteApi.reducerPath]: favoriteApi.reducer,
         user: persistedReducer
     },
     middleware: (getDefaultMiddleware) =>
@@ -41,7 +43,7 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware, accountApi.middleware, serviceApi.middleware),
+        }).concat(userApi.middleware, accountApi.middleware, serviceApi.middleware, favoriteApi.middleware),
 });
 
 export const persistor = persistStore(store);
