@@ -15,10 +15,11 @@ const useAccount = () => {
         toast.error(errorMessage);
     };
 
-    const handlerCreateAccount = async (data) => {
+    const handlerCreateAccount = async (data, reset) => {
         try {
             console.dir(data);   //DEBUG
             await createAccount(data)
+            reset();
             //navigate('/'); //Aquí va el Dashboard de la cuenta bancaria
             toast.success('Account Created Successfully');
         } catch (err) {

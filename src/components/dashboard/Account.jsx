@@ -6,7 +6,7 @@ import Input from '../common/Input';
 import { ComboBox } from '../common/ComboBox';
 
 const AccountPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { createAccount, loading } = useAccount();
     const { user } = useAuth();
 
@@ -17,7 +17,7 @@ const AccountPage = () => {
     ];
 
     const onSubmit = (data) => {
-        createAccount(data)
+        createAccount(data, reset)
     };
 
     return (

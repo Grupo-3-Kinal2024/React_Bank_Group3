@@ -4,6 +4,7 @@ import { accountApi } from './services/accountApi';
 import { transactionApi } from './services/transactionApi';
 import { serviceApi } from './services/serviceApi';
 import userReducer from './feature/userSlice';
+import userCreatedReducer from './feature/userCreatedSlice';
 import {
     persistStore,
     persistReducer,
@@ -24,6 +25,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistedReducer1 = persistReducer(persistConfig, userCreatedReducer);
 
 export const store = configureStore({
     reducer: {
@@ -31,7 +33,8 @@ export const store = configureStore({
         [accountApi.reducerPath]: accountApi.reducer,
         [transactionApi.reducerPath]: transactionApi.reducer,
         [serviceApi.reducerPath]: serviceApi.reducer,
-        user: persistedReducer
+        user: persistedReducer,
+        userCreated: persistedReducer1
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

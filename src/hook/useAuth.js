@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation, useRegisterMutation } from '../services/userApi';
 import { setCredentials, clearCredentials } from '../feature/userSlice';
+import { setUserCreated, clearUserCreated, updateUserCreated } from '../feature/userCreatedSlice';
 import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 
@@ -35,10 +36,12 @@ const useAuth = () => {
 
     const handlerRegister = async (data, reset) => {
         try {
-
-            await register(data).unwrap();
+            const dataToRegister = await register(data).unwrap();
+            console.log("Data to register -->");
+            console.dir(dataToRegister.userDetails.id);
+            const userCreated = dataToRegister.userDetails.name + " | " + dataToRegister.userDetails.id;
+            dispatch(updateUserCreated(userCreated));
             reset();
-            navigate('/');
             toast.success('You have successfully registered');
         } catch (err) {
             handleError(err);
