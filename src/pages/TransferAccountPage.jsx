@@ -7,7 +7,7 @@ import { ComboBox } from '../components/common/ComboBox';
 import useTransaction from '../hook/useTransaction.js';
 import useAuth from '../hook/useAuth.js';
 
-export const TransferAccountPage = () => {
+const TransferAccountPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { transfer } = useTransaction();
     const { user } = useAuth();

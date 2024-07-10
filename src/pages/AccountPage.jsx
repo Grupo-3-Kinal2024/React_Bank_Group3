@@ -5,7 +5,7 @@ import useAuth from '../hook/useAuth';
 import Input from '../components/common/Input';
 import { ComboBox } from '../components/common/ComboBox';
 
-export const AccountPage = () => {
+const AccountPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createAccount, loading } = useAccount();
     const { user } = useAuth();

@@ -1,7 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-export const Sidebar = ({ children }) => {
+export const Sidebar = ({ children, user }) => {
+    const location = useLocation();
+
+    const isActive = (path) => {
+        return location.pathname === path;
+    };
     return (
         <>
             <div className="drawer lg:drawer-open">
@@ -12,12 +17,15 @@ export const Sidebar = ({ children }) => {
                 <div className="drawer-content min-h-[calc(100vh-64px)]">
                     {children}
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side font-bold ">
+                    
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu bg-base-300 text-base-content min-h-full w-80 p-4 ">
-                        <li><Link to='/dashboard/'>SA</Link></li>
-                        <li><Link to='/dashboard/transfer'>Transfer</Link></li>
-                        <li><Link to='/dashboard/create-account'>Crear Cuenta</Link></li>
+                    <ul className="menu menu-lg min-h-full w-80 p-5 space-y-3">
+                        {user && user.role === 'ADMIN' && (
+                            <li><Link to='/dashboard/accounts'>Accounts</Link></li>
+                        )}
+                        <li><Link to='/dashboard/transfer'>Transfer</Link> </li>
+                        <li ><Link to='/dashboard/create-account'>Create a bank account</Link></li>
                     </ul>
                 </div>
             </div>
