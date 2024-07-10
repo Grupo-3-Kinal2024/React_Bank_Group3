@@ -29,6 +29,8 @@ export const store = configureStore({
         [userApi.reducerPath]: userApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [transactionApi.reducerPath]: transactionApi.reducer,
+        [serviceApi.reducerPath]: serviceApi.reducer,
+
         user: persistedReducer
     },
     middleware: (getDefaultMiddleware) =>
@@ -43,7 +45,12 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware, accountApi.middleware, transactionApi.middleware),
+        }).concat(
+            userApi.middleware,
+            accountApi.middleware,
+            transactionApi.middleware,
+            serviceApi.middleware
+        ),
 
 });
 
