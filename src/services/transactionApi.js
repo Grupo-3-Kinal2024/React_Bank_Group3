@@ -12,7 +12,14 @@ export const transactionApi = createApi({
                 body: data
             })
         }),
+        deposit: builder.mutation({
+            query: (data) => ({
+                url: 'transaction/deposit',
+                method: 'POST',
+                body: data
+            })
+        }),
     })
 })
 
-export const { useTransferMutation } = transactionApi;
+export const { useTransferMutation, useDepositMutation } = transactionApi;

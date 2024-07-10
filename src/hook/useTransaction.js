@@ -1,9 +1,10 @@
-import { useTransferMutation } from "../services/transactionApi";
+import { useTransferMutation, useDepositMutation } from "../services/transactionApi";
 import toast from "react-hot-toast";
 
 const useTransaction = () => {
 
     const [transfer] = useTransferMutation();
+    const [createDeposit] = useDepositMutation();
 
     const handleError = (err) => {
         console.log(err);
@@ -11,7 +12,7 @@ const useTransaction = () => {
             || err?.data
             || err?.data?.error
             || 'An error occurred, please try again';
-        toast.error(errorMessage.error);
+        toast.error(errorMessage.error || errorMessage);
     };
 
     const handleTransfer = async (data, reset) => {
@@ -25,8 +26,20 @@ const useTransaction = () => {
         }
     }
 
+    const handlerCreateDeposit = async (data, reset) => {
+        try {
+            await createDeposit(data).unwrap();
+            reset();
+            toast.success("Deposit Created Successfully");
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+
     return {
         transfer: handleTransfer,
+        createDeposit: handlerCreateDeposit
     }
 
 }
