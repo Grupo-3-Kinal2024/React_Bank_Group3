@@ -38,8 +38,8 @@ const useTransaction = () => {
         }
     }
 
-    const getAdminTransactionsUse = async (id) => {
-
+    const getAdminTransactionsUse = (id) => {
+        console.log("ID: ", id);
         const { data, error, isLoading, refetch } = useGetAdminTransactionsQuery(id);
         console.log("REFETCH IN USER", refetch);
         if (error) handleError(error);
