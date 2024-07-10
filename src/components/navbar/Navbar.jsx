@@ -46,6 +46,7 @@ const Navbar = () => {
 
                 {!sidebarOpen && (
                     <div className="hidden lg:flex lg:items-center space-x-4">
+                         <a href="/favorites" className="text-black text-lg hover:underline">Favorites</a>
                         <a href="#" className="text-black text-lg hover:underline">About us</a>
                         <a href="#" className="text-black text-lg hover:underline">Features</a>
                         {isAuthenticated ? (
