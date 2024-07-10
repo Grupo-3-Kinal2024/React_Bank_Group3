@@ -1,21 +1,19 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import Input from '../components/common/Input';
-import Navbar from '../components/navbar/Navbar';
-import transferImg from '../assets/img/transfer.jpg';
-import { ComboBox } from '../components/common/ComboBox';
-import useTransaction from '../hook/useTransaction.js';
-import useAuth from '../hook/useAuth.js';
+import Input from '../common/Input.jsx';
+import transferImg from '../../assets/img/transfer.jpg'
+import { ComboBox } from '../common/ComboBox.jsx';
+import useTransaction from '../../hook/useTransaction.js';
+import useAuth from '../../hook/useAuth.js';
 
-const TransferAccountPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+const TransferAccount = () => {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { transfer } = useTransaction();
     const { user } = useAuth();
 
     const onSubmit = (data) => {
         data.idUser = user.id;
         console.log("Lo que se va: ", data);
-        transfer(data);
+        transfer(data, reset);
     };
 
     const accounts = user.accounts;
@@ -25,14 +23,13 @@ const TransferAccountPage = () => {
 
     return (
         <>
-            <div className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center mb-6 py-12">
-                <div className=" p-10 w-full max-w-4xl flex flex-col lg:flex-row">
+            <div className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center">
+                <div className=" w-full max-w-4xl flex flex-col lg:flex-row">
                     <div className="w-full p-2 flex items-center justify-center">
                         <img src={transferImg} alt="Illustration" className="w-full h-auto max-w-sm object-center object-cover" />
                     </div>
                     <div className="w-full p-8 flex flex-col justify-center">
                         <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Transfer Funds</h2>
-                        <p className="text-center text-gray-600 mb-8">Fill in the details to transfer funds</p>
                         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                             <div className="mb-6">
                                 <ComboBox
@@ -93,4 +90,4 @@ const TransferAccountPage = () => {
     );
 };
 
-export default TransferAccountPage;
+export default TransferAccount;

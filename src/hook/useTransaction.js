@@ -14,9 +14,10 @@ const useTransaction = () => {
         toast.error(errorMessage.error);
     };
 
-    const handleTransfer = async (data) => {
+    const handleTransfer = async (data, reset) => {
         try {
             await transfer(data).unwrap();
+            reset()
             toast.success('Transfer Successful');
         } catch (err) {
             handleError(err);

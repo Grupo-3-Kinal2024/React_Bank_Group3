@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './services/userApi';
 import { accountApi } from './services/accountApi';
 import { transactionApi } from './services/transactionApi';
+import { serviceApi } from './services/serviceApi';
 import userReducer from './feature/userSlice';
 import {
     persistStore,
@@ -30,7 +31,6 @@ export const store = configureStore({
         [accountApi.reducerPath]: accountApi.reducer,
         [transactionApi.reducerPath]: transactionApi.reducer,
         [serviceApi.reducerPath]: serviceApi.reducer,
-
         user: persistedReducer
     },
     middleware: (getDefaultMiddleware) =>

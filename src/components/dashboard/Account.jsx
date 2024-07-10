@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
-import accountImg from '../assets/img/account.jpg'
-import useAccount from '../hook/useAccount';
-import useAuth from '../hook/useAuth';
-import Input from '../components/common/Input';
-import { ComboBox } from '../components/common/ComboBox';
+import accountImg from '../../assets/img/account.jpg'
+import useAccount from '../../hook/useAccount';
+import useAuth from '../../hook/useAuth';
+import Input from '../common/Input';
+import { ComboBox } from '../common/ComboBox';
 
 const AccountPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
