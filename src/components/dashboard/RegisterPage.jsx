@@ -150,7 +150,7 @@ const RegisterPage = () => {
             </div>
             <br />
             <br />
-            <br />
+                                
         </>
     );
 };
