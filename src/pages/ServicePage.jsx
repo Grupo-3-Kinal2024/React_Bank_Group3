@@ -1,35 +1,70 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import { useForm } from 'react-hook-form';
+import useService from '../hook/useService';
+import { useSelector } from 'react-redux';
 
 const ServicePage = () => {
     const services = [
-        { id: 1, name: 'EEGSA', description: 'Pay your electricity bill', img: 'https://www.construguate.com/wp-content/uploads/2020/04/315.jpg' },
-        { id: 2, name: 'EMPAGUA', description: 'Pay your water bill', img: 'https://lahora.gt/wp-content/uploads/sites/5/2020/05/Empagua.jpg' },
-        { id: 3, name: 'TELGUA', description: 'Pay your phone bill', img: 'https://guateportsquetzal.com/wp-content/uploads/2019/06/logoClaro-358x184.png' },
-        { id: 4, name: 'Tigo', description: 'Recharge your mobile phone', img: 'https://www.bitrefill.com/content/cn/b_rgb%3AFFFFFF%2Cc_pad%2Ch_720%2Cw_1280/v1676481894/tigo-bill-el-salvador-newlogo.webp' },
-        { id: 5, name: 'SAT', description: 'Pay your taxes', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Logo_SAT_Guatemala.svg/2560px-Logo_SAT_Guatemala.svg.png' }
+        { id: 1, name: 'EEGSA', numberAccount: '2154800154', description: 'Pay your electricity bill', img: 'https://www.construguate.com/wp-content/uploads/2020/04/315.jpg' },
+        { id: 2, name: 'EMPAGUA', numberAccount: '2015441020', description: 'Pay your water bill', img: 'https://lahora.gt/wp-content/uploads/sites/5/2020/05/Empagua.jpg' },
+        { id: 3, name: 'TELGUA', numberAccount: '2015411201', description: 'Pay your phone bill', img: 'https://guateportsquetzal.com/wp-content/uploads/2019/06/logoClaro-358x184.png' },
+        { id: 4, name: 'Tigo', numberAccount: '9874102115', description: 'Recharge your mobile phone', img: 'https://www.bitrefill.com/content/cn/b_rgb%3AFFFFFF%2Cc_pad%2Ch_720%2Cw_1280/v1676481894/tigo-bill-el-salvador-newlogo.webp' },
+        { id: 5, name: 'SAT', numberAccount: '9154551244', description: 'Pay your taxes', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Logo_SAT_Guatemala.svg/2560px-Logo_SAT_Guatemala.svg.png' }
     ];
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [selectedService, setSelectedService] = useState(null);
     const [monto, setMonto] = useState(0);
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const { createTransfer } = useService();
+    const user = useSelector((state) => state.user.user);
+
+    // Efecto secundario para reiniciar monto cuando cambia selectedService
+    useEffect(() => {
+        setMonto(0);
+    }, [selectedService]);
 
     const handleOpenModal = (service) => {
         setSelectedService(service);
+        setMonto(generateRandomAmount());
         document.getElementById('my_modal_1').showModal();
     };
 
-    const onCounterNumberChange = (e) => {
-        if (e.target.value) {
-            setMonto(Math.floor(Math.random() * 201) + 100); // Genera un monto aleatorio entre 100 y 300
+    const generateRandomAmount = () => {
+        return Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+    };
+
+    const onUniqueFieldChange = (e) => {
+        if (e.target.value.trim() !== '') {
+            setMonto(generateRandomAmount());
+        } else {
+            setMonto(0);
         }
     };
 
     const onSubmit = async (data) => {
-        console.log(data);
-        console.log(`Monto a pagar: ${monto} quetzales`); // Aquí se debería realizar la deducción del monto de la cuenta del usuario
+        if (!user || !user.accounts || user.accounts.length === 0) {
+            console.error('User account information missing');
+            return;
+        }
+
+        const transferData = {
+            sourceAccount: user.accounts[0],
+            destinationAccount: selectedService.numberAccount,
+            amount: monto,
+            description: `Payment for ${selectedService.name}`
+        };
+
+        await createTransfer(transferData);
+        setFormSubmitted(true);
+    };
+
+    const closeModal = () => {
         document.getElementById('my_modal_1').close();
+        reset(); // Limpiar el formulario después de cerrar el modal
+        setMonto(0); // Reiniciar el estado de monto
+        setFormSubmitted(false); // Reiniciar el estado del formulario enviado
     };
 
     return (
@@ -75,13 +110,13 @@ const ServicePage = () => {
                                     id="uniqueField"
                                     {...register("uniqueField", { required: true })}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    onChange={selectedService?.name === 'EEGSA' || selectedService?.name === 'EMPAGUA' ? onCounterNumberChange : null}
+                                    onChange={onUniqueFieldChange}
                                 />
                                 {errors.uniqueField && <span className="text-red-500">This field is required</span>}
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 mb-2" htmlFor="monto">
-                                Amount payable (quetzales)
+                                    Amount payable (quetzales)
                                 </label>
                                 <input
                                     type="text"
@@ -94,7 +129,7 @@ const ServicePage = () => {
                             <div className="modal-action">
                                 <button
                                     className="btn bg-gray-400 hover:bg-gray-300 text-black px-6 py-2 rounded-md"
-                                    onClick={() => document.getElementById('my_modal_1').close()}
+                                    onClick={closeModal} // Utiliza closeModal para cerrar el modal y limpiar el estado
                                 >
                                     Close
                                 </button>
@@ -114,4 +149,3 @@ const ServicePage = () => {
 };
 
 export default ServicePage;
-

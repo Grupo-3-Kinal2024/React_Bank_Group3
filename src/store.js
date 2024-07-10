@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './services/userApi';
 import { accountApi } from './services/accountApi';
+import { serviceApi } from './services/serviceApi';
 import userReducer from './feature/userSlice';
 import {
     persistStore,
@@ -13,9 +14,6 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { serviceApi } from './services/serviceApi';
-
-
 
 const persistConfig = {
     key: 'root',
@@ -26,7 +24,6 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
     reducer: {
-
         [userApi.reducerPath]: userApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [serviceApi.reducerPath]: serviceApi.reducer,
@@ -44,8 +41,7 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware, accountApi.middleware),
-        
+        }).concat(userApi.middleware, accountApi.middleware, serviceApi.middleware),
 });
 
 export const persistor = persistStore(store);
