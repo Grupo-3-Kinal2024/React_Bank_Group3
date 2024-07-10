@@ -17,10 +17,15 @@ export const Sidebar = ({ children, user }) => {
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu menu-lg min-h-full w-80 p-5 space-y-3">
                         {user && user.role === 'ADMIN' && (
-                            <li className='border-l-2 border-violet-800'><Link to='/dashboard/accounts'>Accounts</Link></li>
+                            <>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/accounts'>Accounts</Link></li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-user'>Create a user account</Link></li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-account'>Create a bank account</Link></li>
+
+                            </>
                         )}
                         <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
-                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-account'>Create a bank account</Link></li>
+
                         <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
 
                     </ul>

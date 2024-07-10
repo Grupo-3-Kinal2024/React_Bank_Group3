@@ -17,7 +17,6 @@ const AccountPage = () => {
     ];
 
     const onSubmit = (data) => {
-        data.idUser = user.id;
         createAccount(data)
     };
 
@@ -34,8 +33,20 @@ const AccountPage = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="mb-6">
                                 <Input
+                                    type="text"
+                                    label="Insert The userID"
+                                    name="idUser"
+                                    color="text-gray-700"
+                                    placeholder="ID to the User"
+                                    register={register}
+                                    rules={{ required: 'Enter de ID to the User' }}
+                                    error={errors.salary}
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <Input
                                     type="number"
-                                    label="What is your salary?"
+                                    label="What is the salary"
                                     name="salary"
                                     color="text-gray-700"
                                     placeholder="(GTQ)"
@@ -46,7 +57,7 @@ const AccountPage = () => {
                             </div>
                             <div className="mb-6">
                                 <ComboBox
-                                    label="Open your Account whit..."
+                                    label="Open the Account whit..."
                                     name="credit"
                                     placeholder="Select in GTQ"
                                     options={options}
