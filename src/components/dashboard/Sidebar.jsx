@@ -25,7 +25,7 @@ export const Sidebar = ({ children, user }) => {
                             </>
                         )}
                         <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
-
+                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer-history'>Activity</Link> </li>
                         <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
 
                     </ul>

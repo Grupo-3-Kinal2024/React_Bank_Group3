@@ -4,10 +4,8 @@ import useUser from '../../hook/useUser';
 
 const Accounts = () => {
     const { getAllUsers } = useUser();
-    const { data, isLoading, refetch } = getAllUsers(); // Assuming getAllUsers returns { data, isLoading, error }
-    console.log("🚀 ~ Accounts ~ data:", data);
-
-
+        const { data, isLoading, refetch } = getAllUsers();
+        console.log("🚀 ~ Accounts ~ data:", data);
 
     useEffect(() => {
         refetch();

@@ -1,4 +1,4 @@
-import { useTransferMutation } from "../services/transactionApi";
+import { useTransferMutation, useGetTransfersByUserQuery } from "../services/transactionApi";
 import toast from "react-hot-toast";
 
 const useTransaction = () => {
@@ -21,11 +21,22 @@ const useTransaction = () => {
             toast.success('Transfer Successful');
         } catch (err) {
             handleError(err);
-
         }
     }
 
+    const getTransfersByUser = (numberAccount) => {
+        const { data, error, isLoading, refetch } = useGetTransfersByUserQuery(numberAccount, {
+            skip: !numberAccount,
+        });
+
+        if (error) handleError(error);
+
+        return { data, isLoading, refetch };
+    };
+
+
     return {
+        getTransfersByUser,
         transfer: handleTransfer,
     }
 

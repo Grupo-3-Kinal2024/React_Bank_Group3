@@ -6,13 +6,16 @@ const Accounts = lazy(() => import('../components/dashboard/Accounts.jsx'))
 const Service = lazy(() => import('../components/dashboard/Service.jsx'))
 const RegisterPage = lazy(() => import('../components/dashboard/RegisterPage.jsx'))
 
+const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
+
 const dashboardRoutes = [
     { path: '/accounts', element: <Accounts /> },
     { path: '/create-account', element: <Account /> },
     { path: '/create-user', element: <RegisterPage /> },
     { path: '/transfer', element: <TransferAccount /> },
+    { path: '/transfer-history', element: <TransferHistory /> },
     { path: '/services', element: <Service /> },
-
+  
 ]
 
 export default dashboardRoutes;

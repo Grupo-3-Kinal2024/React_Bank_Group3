@@ -1,6 +1,8 @@
 import React from 'react';
 
 export const ComboBox = ({ label, name, placeholder, options, register, rules, error, color }) => {
+    const selectProps = register ? register(name, rules) : {};
+
     return (
         <>
             <label className={`block ${color} font-bold mb-2`} htmlFor={name}>{label}</label>
@@ -8,7 +10,7 @@ export const ComboBox = ({ label, name, placeholder, options, register, rules, e
                 <select
                     id={name}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    {...register(name, rules)}
+                    {...selectProps}
                 >
                     <option value="">{placeholder}</option>
                     {options.map((option, index) => (
