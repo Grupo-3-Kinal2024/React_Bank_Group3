@@ -1,10 +1,12 @@
-import { useTransferMutation, useDepositMutation } from "../services/transactionApi";
+import { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery } from "../services/transactionApi";
+
 import toast from "react-hot-toast";
 
 const useTransaction = () => {
 
     const [transfer] = useTransferMutation();
     const [createDeposit] = useDepositMutation();
+
 
     const handleError = (err) => {
         console.log(err);
@@ -36,10 +38,20 @@ const useTransaction = () => {
         }
     }
 
+    const getAdminTransactionsUse = async (id) => {
+
+        const { data, error, isLoading, refetch } = useGetAdminTransactionsQuery(id);
+        console.log("REFETCH IN USER", refetch);
+        if (error) handleError(error);
+        return { data, isLoading, refetch };
+
+    }
+
 
     return {
         transfer: handleTransfer,
-        createDeposit: handlerCreateDeposit
+        createDeposit: handlerCreateDeposit,
+        getAdminTransactionsUse
     }
 
 }

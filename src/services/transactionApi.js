@@ -19,7 +19,13 @@ export const transactionApi = createApi({
                 body: data
             })
         }),
+        getAdminTransactions: builder.query({
+            query: (id) => ({
+                url: `transaction/admin-deposit/${id}`,
+                method: 'GET'
+            })
+        })
     })
 })
 
-export const { useTransferMutation, useDepositMutation } = transactionApi;
+export const { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery } = transactionApi;

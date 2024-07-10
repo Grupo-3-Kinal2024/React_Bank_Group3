@@ -18,7 +18,7 @@ const useUser = () => {
         const { data, error, isLoading, refetch } = useGetAllUserQuery();
 
         if (error) handleError(error);
-
+        console.log("REFETCH IN USER", refetch);
         return { data, isLoading, refetch };
     };
     return {
