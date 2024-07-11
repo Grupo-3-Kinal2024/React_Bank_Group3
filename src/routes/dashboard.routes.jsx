@@ -8,6 +8,8 @@ const Enterprise = lazy(() => import('../components/dashboard/RegisterEnterprise
 const RegisterPage = lazy(() => import('../components/dashboard/RegisterPage.jsx'))
 const Deposit = lazy(() => import('../components/dashboard/Deposit.jsx'))
 const Favorite = lazy(() => import('../components/dashboard/Favorite.jsx'))
+const EditProfile = lazy(() => import('../components/dashboard/EditProfile.jsx'))
+
 
 const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
 
@@ -21,6 +23,9 @@ const dashboardRoutes = [
     { path: '/deposit', element: <Deposit /> },
     { path: '/favorite', element: <Favorite /> },
     { path: '/enterprise', element: <Enterprise /> },
+    { path: '/edit-profile', element: <EditProfile /> },
+
+
 ]
 
 export default dashboardRoutes;

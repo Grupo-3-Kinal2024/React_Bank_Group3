@@ -1,8 +1,13 @@
 import React from 'react'
-import { useGetAllUserQuery } from '../services/userApi'
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetAllUserQuery, useEditUserMutation } from '../services/userApi'
+import { updateCredentials } from '../feature/userSlice';
 import toast from "react-hot-toast";
 
 const useUser = () => {
+    const dispatch = useDispatch();
+    const [editUser] = useEditUserMutation()
+
 
     const handleError = (err) => {
         console.log(err);
@@ -21,8 +26,20 @@ const useUser = () => {
         console.log("REFETCH IN USER", refetch);
         return { data, isLoading, refetch };
     };
+
+    const handlerEditUser = async (data) => {
+        try {
+            const edit = await editUser(data).unwrap();
+            dispatch(updateCredentials(edit));
+            toast.success('User update successfully');
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
     return {
-        getAllUsers
+        getAllUsers,
+        edit: handlerEditUser
     }
 }
 

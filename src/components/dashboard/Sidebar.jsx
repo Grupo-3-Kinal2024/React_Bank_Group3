@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export const Sidebar = ({ children, user }) => {
+export const Sidebar = ({ children, user, logout }) => {
 
     return (
         <>
@@ -27,12 +27,16 @@ export const Sidebar = ({ children, user }) => {
                         )}
                         {user && user.role === 'CLIENT' && (
                             <>
-                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/'>Activity</Link> </li>
-                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/favorite'>Favorite</Link> </li>
-                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
-                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/'>Activity</Link> </li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/favorite'>Favorite</Link> </li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/edit-profile'>Edit Profile</Link></li>
                             </>
                         )}
+                        <li className='border-l-2 border-violet-800'><button onClick={logout}>Logout</button>
+                        </li>
+
                     </ul>
                 </div>
             </div>

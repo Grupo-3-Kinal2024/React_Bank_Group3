@@ -4,7 +4,8 @@ import useAuth from '../../hook/useAuth';
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { isAuthenticated, user , logout } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
+    console.log("🚀 ~ Navbar ~ user:", user)
 
     return (
         <div className="bg-white shadow-lg">
@@ -50,13 +51,11 @@ const Navbar = () => {
                         <a href="#" className="text-black text-lg hover:underline">Features</a>
                         {isAuthenticated ? (
                             <>
-                            <button onClick={logout}>logouts</button>
+                                <button className="btn btn-outline">Accout: {user.userName}</button>
                             </>
                         ) : (
                             <>
-
                                 <button><Link to={`/Login/`} className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">Log In</Link></button>
-                                <button><Link to={`/Register/`} className="bg-gray-400 text-black px-4 py-2 rounded-md hover:bg-gray-300">Sign Up</Link></button>
                             </>)
                         }
                     </div>

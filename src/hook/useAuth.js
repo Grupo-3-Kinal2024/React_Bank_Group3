@@ -24,10 +24,14 @@ const useAuth = () => {
 
     const handlerLogin = async (data) => {
         try {
-            const loginRequest = await login(data).unwrap();
-            console.log(loginRequest)
+            const loginRequest = await login(data).unwrap();            
+            console.log(loginRequest.user.role=='ADMIN')
+            if(loginRequest.user.role=='ADMIN'){
+                navigate('/dashboard/accounts');
+            }else{
+                navigate('/dashboard/');
+            }
             dispatch(setCredentials(loginRequest));
-            navigate('/dashboard/create-account');
             toast.success('Successfully logged in');
         } catch (err) {
             handleError(err);
