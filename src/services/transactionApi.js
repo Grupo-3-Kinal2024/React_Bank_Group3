@@ -26,13 +26,17 @@ export const transactionApi = createApi({
                 url: 'transaction/deposit',
                 method: 'POST',
                 body: data
-            })
+            }),
+            invalidatesTags: ['Deposit'],
+
         }),
         getAdminTransactions: builder.query({
             query: (id) => ({
                 url: `transaction/admin-deposit/${id}`,
                 method: 'GET'
-            })
+            }),
+            providesTags: ['Deposit'],
+
         })
     })
 })

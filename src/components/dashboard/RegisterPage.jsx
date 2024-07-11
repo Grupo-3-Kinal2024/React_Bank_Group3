@@ -9,7 +9,8 @@ const RegisterPage = () => {
     const { register: formRegister, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const { register } = useAuth();
     const { userCreated } = useSelector((state) => state.userCreated);
-
+    console.log("🚀 ~ RegisterPage ~ userCreated:", userCreated)
+    
     const onSubmit = (data) => {
         register(data, reset)
         console.log(data);
