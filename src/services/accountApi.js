@@ -5,7 +5,7 @@ export const accountApi = createApi({
     reducerPath: 'accountApi',
     baseQuery: baseQuery,
     endpoints: (builder) => ({
-        
+
         create: builder.mutation({
             query: (data) => ({
                 url: 'account/new',
@@ -13,7 +13,15 @@ export const accountApi = createApi({
                 body: data
             }),
         }),
+
+        details: builder.query({
+            query: (id) => ({
+                url: `account/getDetails/${id}`,
+                method: 'GET',
+            })
+        })
+
     }),
 });
 
-export const { useCreateMutation } = accountApi;
+export const { useCreateMutation, useDetailsQuery } = accountApi;

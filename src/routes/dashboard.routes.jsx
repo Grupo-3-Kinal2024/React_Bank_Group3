@@ -10,6 +10,7 @@ const Deposit = lazy(() => import('../components/dashboard/Deposit.jsx'))
 const Favorite = lazy(() => import('../components/dashboard/Favorite.jsx'))
 const EditProfile = lazy(() => import('../components/dashboard/EditProfile.jsx'))
 const Credit = lazy(() => import('../components/dashboard/Credit.jsx'))
+const DetailsAccount = lazy(() => import('../components/dashboard/DetailsAccount.jsx'))
 
 const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
 
@@ -27,6 +28,7 @@ const dashboardRoutes = [
     { path: '/edit-profile', element: <EditProfile /> },
 
 
+    {path:'/accounts/details/:id', element: <DetailsAccount />}
 ]
 
 export default dashboardRoutes;

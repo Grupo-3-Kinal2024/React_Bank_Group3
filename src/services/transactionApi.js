@@ -30,6 +30,15 @@ export const transactionApi = createApi({
             invalidatesTags: ['Deposit'],
 
         }),
+
+        revert: builder.mutation({
+            query: (id) => ({
+                url: `transaction/revert-deposit/${id}`,
+                method: 'PUT'
+            }),
+            //invalidatesTags: ['Deposit'],
+        }),
+
         getAdminTransactions: builder.query({
             query: (id) => ({
                 url: `transaction/admin-deposit/${id}`,
@@ -41,4 +50,4 @@ export const transactionApi = createApi({
     })
 })
 
-export const { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery, useGetTransfersByUserQuery } = transactionApi;
+export const { useTransferMutation, useDepositMutation, useRevertMutation, useGetAdminTransactionsQuery, useGetTransfersByUserQuery } = transactionApi;

@@ -1,10 +1,11 @@
-import { useCreateMutation } from '../services/accountApi';
+import { useCreateMutation, useDetailsQuery } from '../services/accountApi';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
     //const navigate = useNavigate();
 
     const [createAccount] = useCreateMutation();
+
 
     const handleError = (err) => {
         console.log(err);
@@ -27,8 +28,19 @@ const useAccount = () => {
         }
     }
 
+    const getAccountDetails = (id) => {
+        try {
+            const { data, error, isLoading, refetch } = useDetailsQuery(id);
+            if (error) handleError(error);
+            return { data, isLoading, refetch };
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
     return {
         createAccount: handlerCreateAccount,
+        getAccountDetails
     }
 
 }
