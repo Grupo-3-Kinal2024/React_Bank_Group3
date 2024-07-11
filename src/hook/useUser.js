@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetAllUserQuery, useEditUserMutation } from '../services/userApi'
+import { useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery } from '../services/userApi'
 import { updateCredentials } from '../feature/userSlice';
 import toast from "react-hot-toast";
 
@@ -27,6 +27,13 @@ const useUser = () => {
         return { data, isLoading, refetch };
     };
 
+    const getUserById = (id) => {
+        const { data, error, isLoading, refetch } = useGetUserByIdQuery(id);
+        if (error) handleError(error);
+        return { data, isLoading, refetch };
+    };
+
+
     const handlerEditUser = async (data) => {
         try {
             const edit = await editUser(data).unwrap();
@@ -38,6 +45,7 @@ const useUser = () => {
     }
 
     return {
+        getUserById,
         getAllUsers,
         edit: handlerEditUser
     }

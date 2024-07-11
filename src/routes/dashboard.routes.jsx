@@ -9,16 +9,17 @@ const RegisterPage = lazy(() => import('../components/dashboard/RegisterPage.jsx
 const Deposit = lazy(() => import('../components/dashboard/Deposit.jsx'))
 const Favorite = lazy(() => import('../components/dashboard/Favorite.jsx'))
 const EditProfile = lazy(() => import('../components/dashboard/EditProfile.jsx'))
-
+const Credit = lazy(() => import('../components/dashboard/Credit.jsx'))
 
 const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
 
 const dashboardRoutes = [
+    { path: '/', element: <Credit /> },
     { path: '/accounts', element: <Accounts /> },
     { path: '/create-account', element: <Account /> },
     { path: '/create-user', element: <RegisterPage /> },
     { path: '/transfer', element: <TransferAccount /> },
-    { path: '/', element: <TransferHistory /> },
+    { path: '/transaction-history', element: <TransferHistory /> },
     { path: '/services', element: <Service /> },
     { path: '/deposit', element: <Deposit /> },
     { path: '/favorite', element: <Favorite /> },

@@ -5,8 +5,6 @@ import useAuth from '../../hook/useAuth';
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { isAuthenticated, user, logout } = useAuth();
-    console.log("🚀 ~ Navbar ~ user:", user)
-
     return (
         <div className="bg-white shadow-lg">
             <div className="container mx-auto px-6 py-3 flex items-center justify-between">
@@ -51,7 +49,7 @@ const Navbar = () => {
                         <a href="#" className="text-black text-lg hover:underline">Features</a>
                         {isAuthenticated ? (
                             <>
-                                <button className="btn btn-outline">Accout: {user.userName}</button>
+                                <button className="btn btn-sm btn-outline">Accout: {user.userName}</button>
                             </>
                         ) : (
                             <>
