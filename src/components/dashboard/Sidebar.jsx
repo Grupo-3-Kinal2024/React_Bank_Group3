@@ -15,20 +15,24 @@ export const Sidebar = ({ children, user }) => {
                 </div>
                 <div className="drawer-side font-bold ">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu menu-lg min-h-full w-80 p-5 space-y-3">
+                    <ul className="menu menu-lg min-h-full w-80 p-5 space-y-3 ">
                         {user && user.role === 'ADMIN' && (
                             <>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/accounts'>Accounts</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-user'>Create a user account</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-account'>Create a bank account</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/deposit'>Deposit Money</Link></li>
-
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/enterprise'>Register Enterprise</Link></li>
                             </>
                         )}
-                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
-                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer-history'>Activity</Link> </li>
-                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
-                        <li className='border-l-2 border-violet-800'><Link to='/dashboard/enterprise'>Register Enterprise</Link></li>
+                        {user && user.role === 'CLIENT' && (
+                            <>
+                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/'>Activity</Link> </li>
+                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/favorite'>Favorite</Link> </li>
+                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/transfer'>Transfer</Link> </li>
+                              <li className='border-l-2 border-violet-800'><Link to='/dashboard/services'>Pay for services</Link></li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>

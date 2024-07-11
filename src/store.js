@@ -3,6 +3,7 @@ import { userApi } from './services/userApi';
 import { accountApi } from './services/accountApi';
 import { transactionApi } from './services/transactionApi';
 import { serviceApi } from './services/serviceApi';
+import { favoriteApi } from './services/favoriteApi';
 import userReducer from './feature/userSlice';
 import userCreatedReducer from './feature/userCreatedSlice';
 import {
@@ -16,8 +17,6 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-
 
 const persistConfig = {
     key: 'root',
@@ -33,6 +32,7 @@ export const store = configureStore({
         [accountApi.reducerPath]: accountApi.reducer,
         [transactionApi.reducerPath]: transactionApi.reducer,
         [serviceApi.reducerPath]: serviceApi.reducer,
+        [favoriteApi.reducerPath]: favoriteApi.reducer,
         user: persistedReducer,
         userCreated: persistedReducer1
     },
@@ -52,7 +52,8 @@ export const store = configureStore({
             userApi.middleware,
             accountApi.middleware,
             transactionApi.middleware,
-            serviceApi.middleware
+            serviceApi.middleware,
+            favoriteApi.middleware
         ),
 
 });

@@ -9,9 +9,9 @@ const LoginPage = () => {
     const { login, loading } = useAuth();
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.log("HOLA");
         login(data)
-    };
+    }; 
 
     return (
         <>
