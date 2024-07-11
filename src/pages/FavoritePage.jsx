@@ -6,14 +6,14 @@ import Input from '../components/common/Input';
 import useFavorite from '../hook/useFavorite';
 
 const FavoritePage = () => {
-    const [showForm, setShowForm] = useState(false); // Estado para controlar la visibilidad del formulario
+    const [showForm, setShowForm] = useState(false); 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { favorites, addFavorite, deleteFavorite, loading } = useFavorite();
 
     const onSubmit = (data) => {
         addFavorite(data);
-        reset();  // Reiniciar el formulario después de enviar
-        setShowForm(false); // Ocultar el formulario después de agregar un favorito
+        reset();  
+        setShowForm(false); 
     };
 
     return (
