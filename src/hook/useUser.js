@@ -1,13 +1,11 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery } from '../services/userApi'
+import { useDispatch } from 'react-redux';
+import { useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery } from '../services/userApi';
 import { updateCredentials } from '../feature/userSlice';
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 
 const useUser = () => {
     const dispatch = useDispatch();
-    const [editUser] = useEditUserMutation()
-
+    const [editUser] = useEditUserMutation();
 
     const handleError = (err) => {
         console.log(err);
@@ -18,10 +16,8 @@ const useUser = () => {
         toast.error(errorMessage);
     };
 
-
-    const getAllUsers = (id) => {
+    const getAllUsers = () => {
         const { data, error, isLoading, refetch } = useGetAllUserQuery();
-
         if (error) handleError(error);
         console.log("REFETCH IN USER", refetch);
         return { data, isLoading, refetch };
@@ -33,12 +29,11 @@ const useUser = () => {
         return { data, isLoading, refetch };
     };
 
-
     const handlerEditUser = async (data) => {
         try {
             const edit = await editUser(data).unwrap();
             dispatch(updateCredentials(edit));
-            toast.success('User update successfully');
+            toast.success('User updated successfully');
         } catch (error) {
             handleError(error);
         }
@@ -48,7 +43,7 @@ const useUser = () => {
         getUserById,
         getAllUsers,
         edit: handlerEditUser
-    }
+    };
 }
 
-export default useUser
+export default useUser;

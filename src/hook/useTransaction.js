@@ -19,13 +19,11 @@ const useTransaction = () => {
 
     const handleTransfer = async (data, reset) => {
         try {
-            if (data.amount > 2000) {
-                return toast.error("the transaction limit is 2000 Quetzales.");
-            } else {
+           
                 await transfer(data).unwrap();
                 reset()
                 toast.success('Transfer Successful');
-            }
+       
         } catch (err) {
             handleError(err);
         }

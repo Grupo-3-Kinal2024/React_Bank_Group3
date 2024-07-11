@@ -24,6 +24,12 @@ export const userApi = createApi({
                 method: 'GET',
             })
         }),
+        getEnterprises: builder.query({
+            query: () => ({
+                url: 'user/enterprise',
+                method: 'GET',
+            })
+        }),
         register: builder.mutation({
             query: (data) => ({
                 url: 'auth/register',
@@ -41,4 +47,4 @@ export const userApi = createApi({
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery } = userApi;
+export const { useLoginMutation, useRegisterMutation, useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery, getEnterprises } = userApi;
