@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import useUser from '../../hook/useUser';
+import { Link } from 'react-router-dom';
 
 
 const Accounts = () => {
     const { getAllUsers } = useUser();
-        const { data, isLoading, refetch } = getAllUsers();
-        console.log("🚀 ~ Accounts ~ data:", data);
+    const { data, isLoading, refetch } = getAllUsers();
+    console.log("🚀 ~ Accounts ~ data:", data);
 
     useEffect(() => {
         refetch();
@@ -42,7 +43,7 @@ const Accounts = () => {
                                         <td>{account.numberAccount}</td>
                                         <td>{account.status ? "Active" : "Inactive"}</td>
                                         <td>{user.name} {user.lastName}</td>
-                                        <td><a className='link link-primary'>Details</a></td>
+                                        <td><Link to={`../accounts/details/${account._id}`} className='link link-primary'>Details</Link></td>
                                     </tr>
                                 ))
                             )}
