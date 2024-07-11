@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useUser from '../../hook/useUser';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
 
 const Accounts = () => {
     const { getAllUsers } = useUser();
@@ -18,18 +15,22 @@ const Accounts = () => {
         return <span className="loading loading-dots loading-lg"></span>;
     }
 
-    let sortedUsers = [...data];
+    // Recolecta todas las cuentas en un solo arreglo
+    let allAccounts = data.flatMap(user => user.accounts.map(account => ({
+        ...account,
+        ownerName: `${user.name} ${user.lastName}`
+    })));
 
-    sortedUsers.sort((a, b) => {
-        const totalTransactionsA = a.accounts.reduce((sum, account) => sum + account.numberTransactions, 0);
-        const totalTransactionsB = b.accounts.reduce((sum, account) => sum + account.numberTransactions, 0);
+    // Ordena las cuentas basándose en el número de transacciones
+    allAccounts.sort((a, b) => {
         if (ascendingOrder) {
-            return totalTransactionsA - totalTransactionsB; // Ascendente
+            return a.numberTransactions - b.numberTransactions; // Ascendente
         } else {
-            return totalTransactionsB - totalTransactionsA; // Descendente
+            return b.numberTransactions - a.numberTransactions; // Descendente
         }
     });
 
+    // Función para alternar el orden de clasificación
     const toggleOrder = () => {
         setAscendingOrder(!ascendingOrder);
     };
@@ -39,7 +40,7 @@ const Accounts = () => {
             <div className='mb-6'>
                 <h1 className='text-center font-bold text-4xl'>All Accounts</h1>
             </div>
-            <div className=" text-center">
+            <div className="text-center">
                 <button onClick={toggleOrder} className="btn bg-blue-400 text-gray-100">
                     {ascendingOrder ? "Ascending sort (Switch)" : "Descending sort (Switch)"}
                 </button>
@@ -49,6 +50,7 @@ const Accounts = () => {
                     <table className="table table-zebra w-full">
                         <thead>
                             <tr>
+                                <th># Movements</th>
                                 <th>Credit</th>
                                 <th>Number Account</th>
                                 <th>Status</th>
@@ -57,28 +59,26 @@ const Accounts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {sortedUsers.map((user, userIndex) =>
-                                user.accounts.map((account, accountIndex) => (
-                                    <tr key={account._id}>
-                                        <td>{account.credit}</td>
-                                        <td>{account.numberAccount}</td>
-                                        <td>{account.status ? "Active" : "Inactive"}</td>
-                                        <td>{user.name} {user.lastName}</td>
-                                        <td>
-                                            <Link to={`../accounts/details/${account._id}`} className='link link-primary'>
-                                                Details
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
+                            {allAccounts.map((account) => (
+                                <tr key={account._id}>
+                                    <td>{account.numberTransactions}</td>
+                                    <td>{account.credit}</td>
+                                    <td>{account.numberAccount}</td>
+                                    <td>{account.status ? "Active" : "Inactive"}</td>
+                                    <td>{account.ownerName}</td>
+                                    <td>
+                                        <Link to={`../accounts/details/${account._id}`} className='link link-primary'>
+                                            Details
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
     );
-}
+};
 
 export default Accounts;

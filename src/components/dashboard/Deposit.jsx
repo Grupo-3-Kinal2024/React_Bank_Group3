@@ -12,12 +12,18 @@ const Deposit = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { createDeposit, loading, getAdminTransactionsUse } = useTransaction();
 
+    useEffect(() => {
 
+    }, []);
 
     const onSubmit = (data) => {
         data.adminId = user.id;
         createDeposit(data, reset)
     };
+
+    if (loading) {
+        return <span className="loading loading-dots loading-lg"></span>;
+    }
 
     return (
         <>
