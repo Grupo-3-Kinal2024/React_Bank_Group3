@@ -12,6 +12,15 @@ export const transactionApi = createApi({
                 body: data
             })
         }),
+        getTransfersByUser: builder.query({
+            query: (numberAccount) => ({
+                url: `transaction/my-transactions/${numberAccount}`,
+                method: 'GET',
+            }),
+            transformResponse: (response) => response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+
+        }),
+
         deposit: builder.mutation({
             query: (data) => ({
                 url: 'transaction/deposit',
@@ -28,4 +37,4 @@ export const transactionApi = createApi({
     })
 })
 
-export const { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery } = transactionApi;
+export const { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery, useGetTransfersByUserQuery } = transactionApi;

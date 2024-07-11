@@ -1,4 +1,4 @@
-import { useTransferMutation, useDepositMutation, useGetAdminTransactionsQuery } from "../services/transactionApi";
+import { useTransferMutation, useGetTransfersByUserQuery, useDepositMutation, useGetAdminTransactionsQuery } from "../services/transactionApi";
 
 import toast from "react-hot-toast";
 
@@ -24,7 +24,6 @@ const useTransaction = () => {
             toast.success('Transfer Successful');
         } catch (err) {
             handleError(err);
-
         }
     }
 
@@ -48,7 +47,19 @@ const useTransaction = () => {
     }
 
 
+    const getTransfersByUser = (numberAccount) => {
+        const { data, error, isLoading, refetch } = useGetTransfersByUserQuery(numberAccount, {
+            skip: !numberAccount,
+        });
+
+        if (error) handleError(error);
+
+        return { data, isLoading, refetch };
+    };
+
+
     return {
+        getTransfersByUser,
         transfer: handleTransfer,
         createDeposit: handlerCreateDeposit,
         getAdminTransactionsUse
