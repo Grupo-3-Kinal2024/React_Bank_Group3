@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useTransaction from '../../hook/useTransaction';
 import useAuth from '../../hook/useAuth';
 import { format } from 'date-fns';
@@ -7,23 +7,33 @@ import { useEffect } from 'react';
 const TransactionsAdmin = () => {
 
     const { user } = useAuth();
-    const { createDeposit, loading, getAdminTransactionsUse } = useTransaction();
+    const { createDeposit, loading, getAdminTransactionsUse, revert } = useTransaction();
     const { data, isLoading, refetch } = getAdminTransactionsUse(user.id);
-    console.log("Data simple in page: ", data);
+
+    const [dataSimple, setDataSimple] = useState(data);
+
+
+    console.log("Data simple in page: ", dataSimple);
 
 
     useEffect(() => {
         refetch();
     }, [refetch]);
 
+    const handleRevert = async (id) => {
+        //event.preventDefault();
+        console.log("Revert transaction with id: ", id);
+        revert(id);
+        //setDataSimple(getAdminTransactionsUse(user.id));
 
+    }
 
     if (isLoading) {
         return <span className="loading loading-dots loading-lg"></span>;
     }
 
     return (
-        <div className="p-8 mb-16">
+        <div className="p-2 mb-50">
             <div className='mb-6'>
                 <h1 className='text-center font-bold text-4xl'>Deposits whit my</h1>
             </div>
@@ -35,18 +45,22 @@ const TransactionsAdmin = () => {
                                 <th>Destination Account</th>
                                 <th>Date</th>
                                 <th>Amount</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
 
-                                data.slice(-5).reverse().map((transaction, index) => {
-                                    const formattedDate = format(new Date(transaction.date), 'dd-MM-yyyy HH:mm');
+                                dataSimple.slice(-5).reverse().map((transaction, index) => {
+                                    const formattedDate = format(new Date(transaction.date), 'dd-MM-yyyy');
                                     return (
                                         <tr key={index}>
                                             <td>{transaction.destinationAccount}</td>
                                             <td>{formattedDate}</td>
                                             <td>{transaction.amount}</td>
+                                            <td>
+                                                <button onClick={() => handleRevert(transaction._id)} className="btn bg-red-400 text-gray-100">revert</button>
+                                            </td>
                                         </tr>
                                     );
                                 })
