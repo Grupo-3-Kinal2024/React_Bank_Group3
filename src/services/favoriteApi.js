@@ -1,4 +1,3 @@
-
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from './baseQuery';
 
@@ -19,7 +18,13 @@ export const favoriteApi = createApi({
                 body: data,
             }),
         }),
+        deleteFavorite: builder.mutation({
+            query: (id) => ({
+                url: `favorite/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 });
 
-export const { useGetAllFavoritesQuery, useAddFavoriteMutation } = favoriteApi;
+export const { useGetAllFavoritesQuery, useAddFavoriteMutation, useDeleteFavoriteMutation } = favoriteApi;
