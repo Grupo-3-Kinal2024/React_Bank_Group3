@@ -54,7 +54,9 @@ const DetailsAccount = () => {
                                 <th className="px-4 py-2 border-b">Type Transaction</th>
                                 <th className="px-4 py-2 border-b">Description</th>
                                 <th className="px-4 py-2 border-b">Amount</th>
-                                <th className="px-4 py-2 border-b">Data</th>
+                                <th className="px-4 py-2 border-b">Source Account</th>
+                                <th className="px-4 py-2 border-b">Destination Account</th>
+                                <th className="px-4 py-2 border-b">Date and hour</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,7 +71,7 @@ const DetailsAccount = () => {
                                         </tr>
                                     </>
                                 ) : (
-                                    data.transactions.slice(-5).map((transaction, index) => {
+                                    data.transactions.slice(-5).reverse().map((transaction, index) => {
                                         const formattedDate = format(new Date(transaction.date), 'dd-MM-yyyy HH:mm');
                                         const accountNumber = data.account.numberAccount; // Reemplaza con el número de cuenta correcto
                                         console.log("SourceAccount: ", transaction.destinationAccount);
@@ -90,6 +92,16 @@ const DetailsAccount = () => {
                                                 </td>
                                                 <td className={`px-4 py-2 border-b ${textColor}`}>
                                                     {transaction.amount}
+                                                </td>
+                                                <td className={`px-4 py-2 border-b ${textColor}`}>
+                                                    {
+                                                        transaction.sourceAccount == accountNumber ? "This Account" : transaction.sourceAccount
+                                                    }
+                                                </td>
+                                                <td className={`px-4 py-2 border-b ${textColor}`}>
+                                                    {
+                                                        transaction.destinationAccount == accountNumber ? "This Account" : transaction.destinationAccount
+                                                    }
                                                 </td>
                                                 <td className={`px-4 py-2 border-b ${textColor}`}>
                                                     {formattedDate}
