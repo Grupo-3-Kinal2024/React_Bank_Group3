@@ -1,4 +1,6 @@
 import React, { lazy } from 'react';
+import PrivateRoute from '../routes/PrivateRoutes';
+import PrivateRouteAdmin from '../routes/PrivateRoutesAdmin';
 
 const Account = lazy(() => import('../components/dashboard/Account.jsx'));
 const TransferAccount = lazy(() => import('../components/dashboard/TransferAccount.jsx'));
@@ -15,20 +17,20 @@ const DetailsAccount = lazy(() => import('../components/dashboard/DetailsAccount
 const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
 
 const dashboardRoutes = [
-    { path: '/', element: <Credit /> },
-    { path: '/accounts', element: <Accounts /> },
-    { path: '/create-account', element: <Account /> },
+    { path: '/', element: <PrivateRoute element={<Credit />} />  },
+    { path: '/accounts', element: <PrivateRouteAdmin element={<Accounts />}/> },
+    { path: '/create-account', element: <PrivateRoute element={<Account />}/> },
     { path: '/create-user', element: <RegisterPage /> },
-    { path: '/transfer', element: <TransferAccount /> },
-    { path: '/transaction-history', element: <TransferHistory /> },
-    { path: '/services', element: <Service /> },
-    { path: '/deposit', element: <Deposit /> },
-    { path: '/favorite', element: <Favorite /> },
-    { path: '/enterprise', element: <Enterprise /> },
-    { path: '/edit-profile', element: <EditProfile /> },
+    { path: '/transfer', element: <PrivateRoute element={<TransferAccount />} />},
+    { path: '/transaction-history', element: <PrivateRoute element={<TransferHistory />} />},
+    { path: '/services', element: <PrivateRoute element={<Service />} />},
+    { path: '/deposit', element: <PrivateRoute element={<Deposit />} />},
+    { path: '/favorite', element: <PrivateRoute element={<Favorite />} />},
+    { path: '/enterprise', element: <PrivateRoute element={<Enterprise />} />},
+    { path: '/edit-profile', element: <PrivateRoute element={<EditProfile />} />},
 
 
-    {path:'/accounts/details/:id', element: <DetailsAccount />}
+    {path:'/accounts/details/:id', element: <PrivateRoute element={<DetailsAccount />} />}
 ]
 
 export default dashboardRoutes;
