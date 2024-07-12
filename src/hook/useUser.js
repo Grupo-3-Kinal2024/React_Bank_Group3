@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery } from '../services/userApi';
+import { useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery, useDeleteUserMutation, useUpdateUserMutation } from '../services/userApi';
 import { updateCredentials } from '../feature/userSlice';
 import toast from 'react-hot-toast';
 
 const useUser = () => {
     const dispatch = useDispatch();
     const [editUser] = useEditUserMutation();
+    const [deleteUser] = useDeleteUserMutation();
+    const [updateUser] = useUpdateUserMutation();
 
     const handleError = (err) => {
         console.log(err);
@@ -16,10 +18,28 @@ const useUser = () => {
         toast.error(errorMessage);
     };
 
+
+    const handleDeleteUser = async (id) => {
+        try {
+            await deleteUser(id).unwrap();
+            toast.success('User deleted successfully');
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+
+    const handleUpdateUser = async (data) => {
+        try {
+            await updateUser(data).unwrap();
+            toast.success('User update successfully');
+        } catch (err) {
+            handleError(err);
+        }
+    }
     const getAllUsers = () => {
         const { data, error, isLoading, refetch } = useGetAllUserQuery();
         if (error) handleError(error);
-        console.log("REFETCH IN USER", refetch);
         return { data, isLoading, refetch };
     };
 
@@ -42,7 +62,9 @@ const useUser = () => {
     return {
         getUserById,
         getAllUsers,
-        edit: handlerEditUser
+        deleteUser: handleDeleteUser,
+        edit: handlerEditUser,
+        update: handleUpdateUser,
     };
 }
 

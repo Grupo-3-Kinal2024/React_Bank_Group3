@@ -11,7 +11,7 @@ const Favorite = lazy(() => import('../components/dashboard/Favorite.jsx'))
 const EditProfile = lazy(() => import('../components/dashboard/EditProfile.jsx'))
 const Credit = lazy(() => import('../components/dashboard/Credit.jsx'))
 const DetailsAccount = lazy(() => import('../components/dashboard/DetailsAccount.jsx'))
-
+const Management = lazy(() => import('../components/dashboard/ManagementUser.jsx'))
 const TransferHistory = lazy(() => import('../components/dashboard/TransferHistory.jsx'))
 
 const dashboardRoutes = [
@@ -25,10 +25,9 @@ const dashboardRoutes = [
     { path: '/deposit', element: <Deposit /> },
     { path: '/favorite', element: <Favorite /> },
     { path: '/enterprise', element: <Enterprise /> },
+    { path: '/management-users', element: <Management /> },
     { path: '/edit-profile', element: <EditProfile /> },
-
-
-    {path:'/accounts/details/:id', element: <DetailsAccount />}
+    { path: '/accounts/details/:id', element: <DetailsAccount /> }
 ]
 
 export default dashboardRoutes;
