@@ -16,7 +16,9 @@ export const userApi = createApi({
             query: () => ({
                 url: 'user/',
                 method: 'GET',
-            })
+            }),
+            providesTags: ['User'],
+
         }),
         getUserById: builder.query({
             query: () => ({
@@ -44,7 +46,22 @@ export const userApi = createApi({
                 body: data,
             }),
         }),
+        deleteUser: builder.mutation({
+            query: (id) => ({
+                url: `user/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['User'],
+        }),
+        updateUser: builder.mutation({
+            query: (data) => ({
+                url: `user/${data._id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['User'],
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery, getEnterprises } = userApi;
+export const { useUpdateUserMutation, useLoginMutation, useRegisterMutation, useGetAllUserQuery, useEditUserMutation, useGetUserByIdQuery, getEnterprises, useDeleteUserMutation } = userApi;

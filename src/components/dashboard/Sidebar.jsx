@@ -19,6 +19,7 @@ export const Sidebar = ({ children, user, logout }) => {
                         {user && user.role === 'ADMIN' && (
                             <>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/accounts'>Accounts</Link></li>
+                                <li className='border-l-2 border-violet-800'><Link to='/dashboard/management-users'>Management users</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-user'>Create a user account</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/create-account'>Create a bank account</Link></li>
                                 <li className='border-l-2 border-violet-800'><Link to='/dashboard/deposit'>Deposit Money</Link></li>

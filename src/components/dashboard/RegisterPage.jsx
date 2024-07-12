@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Navbar from '../navbar/Navbar';
 import Input from '../common/Input';
+import { ComboBox } from '../common/ComboBox';
 import useAuth from '../../hook/useAuth';
 
 const RegisterPage = () => {
@@ -10,7 +9,13 @@ const RegisterPage = () => {
     const { register } = useAuth();
     const { userCreated } = useSelector((state) => state.userCreated);
     console.log("🚀 ~ RegisterPage ~ userCreated:", userCreated)
-    
+
+    const options = [
+        { value: "ADMIN", label: 'Client' },
+        { value: "CLIENT", label: 'Admin' },
+        { value: "ENTERPRISE", label: 'Enterprise' },
+    ];
+
     const onSubmit = (data) => {
         register(data, reset)
         console.log(data);
@@ -70,29 +75,32 @@ const RegisterPage = () => {
                                 />
                             </div>
                         </div>
-                        <div className="mb-4">
-                            <Input
-                                type="text"
-                                label="Username"
-                                name="userName"
-                                color="text-gray-700"
-                                placeholder="Enter the username"
-                                register={formRegister}
-                                rules={{ required: 'Username is required' }}
-                                error={errors.userName}
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <Input
-                                type="email"
-                                label="Email"
-                                name="email"
-                                color="text-gray-700"
-                                placeholder="Enter the email"
-                                register={formRegister}
-                                rules={{ required: 'Email is required' }}
-                                error={errors.email}
-                            />
+                        <div className="mb-4 flex space-x-4">
+
+                            <div className="w-1/2">
+                                <Input
+                                    type="text"
+                                    label="Username"
+                                    name="userName"
+                                    color="text-gray-700"
+                                    placeholder="Enter the username"
+                                    register={formRegister}
+                                    rules={{ required: 'Username is required' }}
+                                    error={errors.userName}
+                                />
+                            </div>
+                            <div className="w-1/2">
+                                <Input
+                                    type="email"
+                                    label="Email"
+                                    name="email"
+                                    color="text-gray-700"
+                                    placeholder="Enter the email"
+                                    register={formRegister}
+                                    rules={{ required: 'Email is required' }}
+                                    error={errors.email}
+                                />
+                            </div>
                         </div>
                         <div className="mb-4 flex space-x-4">
                             <div className="w-1/2">
@@ -132,18 +140,34 @@ const RegisterPage = () => {
                                 error={errors.address}
                             />
                         </div>
-                        <div className="mb-6">
-                            <Input
-                                type="text"
-                                label="Job Name"
-                                name="jobName"
-                                color="text-gray-700"
-                                placeholder="Enter the job name"
-                                register={formRegister}
-                                rules={{ required: 'Job Name is required' }}
-                                error={errors.jobName}
-                            />
+                        <div className="mb-6 flex space-x-4">
+                            <div className="w-1/2">
+                                <Input
+                                    type="text"
+                                    label="Job Name"
+                                    name="jobName"
+                                    color="text-gray-700"
+                                    placeholder="Enter the job name"
+                                    register={formRegister}
+                                    rules={{ required: 'Job Name is required' }}
+                                    error={errors.jobName}
+                                />
+                            </div>
+                            <div className="w-1/2">
+                                <ComboBox
+                                    label="Role"
+                                    color="text-gray-700"
+                                    placeholder="Assign a role"
+                                    name={"role"}
+                                    register={formRegister}
+                                    error={errors.role}
+                                    rules={{ required: 'Role is required' }}
+                                    options={options}
+                                />
+                            </div>
                         </div>
+
+
                         <button type="submit" className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none">Create the account</button>
                     </form>
                 </div>
