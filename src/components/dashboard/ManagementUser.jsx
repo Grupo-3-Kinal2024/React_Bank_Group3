@@ -87,11 +87,9 @@ const ManagementUser = () => {
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Edit User</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className="py-4">
-                        <Input label="DPI" name="DPI" type="text" placeholder="Enter DPI" register={register} error={errors.DPI} />
                         <Input label="Name" name="name" type="text" placeholder="Enter Name" register={register} error={errors.name} />
                         <Input label="Last Name" name="lastName" type="text" placeholder="Enter Last Name" register={register} error={errors.lastName} />
                         <Input label="Username" name="userName" type="text" placeholder="Enter Username" register={register} error={errors.userName} />
-                        <Input label="Email" name="email" type="email" placeholder="Enter Email" register={register} error={errors.email} />
                         <Input label="Role" name="role" type="text" placeholder="Enter Role" register={register} error={errors.role} />
                         <Input label="Phone" name="phone" type="text" placeholder="Enter Phone" register={register} error={errors.phone} />
                         <Input label="Address" name="address" type="text" placeholder="Enter Address" register={register} error={errors.address} />
