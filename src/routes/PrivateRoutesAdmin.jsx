@@ -12,4 +12,4 @@ const PrivateRouteAdmin = ({ element }) => {
     return element;
 };
 
-export default PrivateRoute;
+export default PrivateRouteAdmin;

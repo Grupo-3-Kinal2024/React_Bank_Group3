@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
-import PrivateRoute from '../routes/PrivateRoutes';
-import PrivateRouteAdmin from '../routes/PrivateRoutesAdmin';
+import PrivateRoute from '../routes/PrivateRoutes.jsx';
+import PrivateRouteAdmin from '../routes/PrivateRoutesAdmin.jsx';
 
 const Account = lazy(() => import('../components/dashboard/Account.jsx'));
 const TransferAccount = lazy(() => import('../components/dashboard/TransferAccount.jsx'));
@@ -19,7 +19,7 @@ const TransferHistory = lazy(() => import('../components/dashboard/TransferHisto
 const dashboardRoutes = [
     { path: '/', element: <PrivateRoute element={<Credit />} />  },
     { path: '/accounts', element: <PrivateRouteAdmin element={<Accounts />}/> },
-    { path: '/create-account', element: <PrivateRoute element={<Account />}/> },
+    { path: '/create-account', element: <Account />},
     { path: '/create-user', element: <RegisterPage /> },
     { path: '/transfer', element: <PrivateRoute element={<TransferAccount />} />},
     { path: '/transaction-history', element: <PrivateRoute element={<TransferHistory />} />},
