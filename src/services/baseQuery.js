@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://127.0.0.1:3000/bank/v1',
+    baseUrl: 'http://192.168.1.7:3000/bank/v1',
     prepareHeaders: (headers, { getState }) => {
         const state = getState();
         const { token } = state.user || {};
